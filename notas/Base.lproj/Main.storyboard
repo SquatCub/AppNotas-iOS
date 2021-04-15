@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="120.53571428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--Editar View Controller-->
         <scene sceneID="Na5-XB-vJ5">
             <objects>
-                <viewController id="qVk-iF-EiP" sceneMemberID="viewController">
+                <viewController id="qVk-iF-EiP" customClass="EditarViewController" customModule="notas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PPh-AP-hnD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
