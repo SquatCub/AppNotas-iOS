@@ -58,14 +58,19 @@ class ViewController: UIViewController {
 }
 // Table view methods
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    // Mostrar solo el numero de datos existente de datos
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notas.count
     }
+    // Asignar cada valor a su celda
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tablaNotas.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         celda.textLabel?.text = notas[indexPath.row]
         return celda
+    }
+    // Poder ejecutar accion al hacer click en un elemento
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "editar", sender: self)
     }
 }
 

@@ -49,26 +49,48 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tablaNotas" destination="14y-8S-9bM" id="gJk-oJ-6D1"/>
+                        <segue destination="qVk-iF-EiP" kind="show" identifier="editar" id="hP3-qW-nfq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="120.53571428571428"/>
         </scene>
-        <!--Editar View Controller-->
+        <!--Editar nota-->
         <scene sceneID="Na5-XB-vJ5">
             <objects>
                 <viewController id="qVk-iF-EiP" customClass="EditarViewController" customModule="notas" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PPh-AP-hnD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bdi-ub-mCP">
+                                <rect key="frame" x="10" y="140" width="394" height="722"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="79D-TJ-5Ll">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="722"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="l2A-PC-ZWK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Bdi-ub-mCP" firstAttribute="leading" secondItem="l2A-PC-ZWK" secondAttribute="leading" constant="10" id="4i3-eu-mbY"/>
+                            <constraint firstItem="l2A-PC-ZWK" firstAttribute="bottom" secondItem="Bdi-ub-mCP" secondAttribute="bottom" id="5O9-3f-WeI"/>
+                            <constraint firstItem="Bdi-ub-mCP" firstAttribute="top" secondItem="l2A-PC-ZWK" secondAttribute="top" id="7MX-6l-eVC"/>
+                            <constraint firstItem="l2A-PC-ZWK" firstAttribute="trailing" secondItem="Bdi-ub-mCP" secondAttribute="trailing" constant="10" id="SOz-wT-1Ji"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Editar nota" id="gt8-Ez-y4i">
+                        <barButtonItem key="rightBarButtonItem" title="Guardar" style="plain" id="waw-cQ-9XD"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QB8-ny-bS2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="121"/>
+            <point key="canvasLocation" x="1885.5072463768117" y="120.53571428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="c7i-e7-cy0">
