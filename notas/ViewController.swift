@@ -12,12 +12,17 @@ class ViewController: UIViewController {
     var defaultsBD = UserDefaults.standard
     // Arreglo de notas
     var notas = [""]
+    // Nota auxiliar para segue
+    var currentNota: String?
+    // INdex auxiliar para segue
+    var currentIndex: Int?
     // Tabla
     @IBOutlet weak var tablaNotas: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Asignar delegado y dataSourse a la tabla
+        tablaNotas.backgroundColor = UIColor.clear
         tablaNotas.delegate = self
         tablaNotas.dataSource = self
         // Si ya hay algo en la BD lo obtiene, sino muestra la lista vacia
@@ -26,12 +31,16 @@ class ViewController: UIViewController {
         } else {
             notas = []
         }
-        
     }
-    
-    
+    // Funcion para checar si hay cambios y aplicarlos
+    override func viewWillAppear(_ animated: Bool) {
+        if let notasEditadas = defaultsBD.array(forKey: "notas") as? [String] {
+            notas = notasEditadas
+        }
+        tablaNotas.reloadData()
+    }
     // Funcion para agregar nota nueva
-    @IBAction func addNotaButton(_ sender: Any) {
+    @IBAction func crearNota(_ sender: Any) {
         // Creacion de la alerta
         let alerta = UIAlertController(title: "Agregar nota", message: "", preferredStyle: .alert)
         // Creamos un textField para la alerta
@@ -66,11 +75,40 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tablaNotas.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         celda.textLabel?.text = notas[indexPath.row]
+        celda.textLabel?.textColor = UIColor.white
+        
         return celda
     }
     // Poder ejecutar accion al hacer click en un elemento
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentNota = notas[indexPath.row]
+        currentIndex = Int(indexPath.row)
         performSegue(withIdentifier: "editar", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editar" {
+            let objetoEditar = segue.destination as! EditarViewController
+            objetoEditar.nota = currentNota
+            objetoEditar.index = currentIndex
+            objetoEditar.notas = self.notas
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            notas.remove(at: indexPath.row)
+            tablaNotas.deleteRows(at: [indexPath], with: .fade)
+            defaultsBD.set(notas, forKey: "notas")
+        }
+    }
+    // Agregar espacio entre celdas
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        let verticalPadding: CGFloat = 5
+
+        let maskLayer = CALayer()
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height: cell.bounds.height).insetBy(dx: 0, dy: verticalPadding/2)
+        cell.layer.mask = maskLayer
     }
 }
 
