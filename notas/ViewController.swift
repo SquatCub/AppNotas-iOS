@@ -75,6 +75,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tablaNotas.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         celda.textLabel?.text = notas[indexPath.row]
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+
+        let datetime = formatter.string(from: now)
+        
+        celda.detailTextLabel?.text = "Fecha: \(datetime)"
         celda.textLabel?.textColor = UIColor.white
         
         return celda
